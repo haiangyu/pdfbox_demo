@@ -50,7 +50,6 @@ public class PdfController {
         // 底版 PDF
         File file = ResourceUtils.getFile("classpath:static/001.pdf");
         PDDocument pdfDoc = Loader.loadPDF(file);
-//        pdfDoc.getPage(0);
 
         PDDocumentCatalog catalog = pdfDoc.getDocumentCatalog();
         PDAcroForm acroForm = catalog.getAcroForm();
@@ -59,31 +58,9 @@ public class PdfController {
         File fileEmptyPDF = ResourceUtils.getFile("classpath:static/001_empty.pdf");
         PDDocument pdfDocEmpty = Loader.loadPDF(fileEmptyPDF);
 
-//        pdfDocEmpty.getPage(0);
-
-//        List<PDField> fields = acroForm.getFields();
-
         PDDocumentCatalog catalogEmpty = pdfDocEmpty.getDocumentCatalog();
         PDAcroForm acroFormEmpty = catalogEmpty.getAcroForm();
-//        List<PDField> fieldsEmpty = acroFormEmpty.getFields();
-//        for (PDField field: fieldsEmpty) {
-//                String fieldName = field.getFullyQualifiedName();
-//                log.warn("Empty Full Qualified Name : " + field.getFullyQualifiedName());
-//        }
-//        PDAcroForm acroFormEmpty = new PDAcroForm(pdfDocEmpty);
 
-//        acroFormEmpty.setCacheFields(true);
-//        acroFormEmpty.setFields(acroForm.getFields());
-//        acroFormEmpty.setDefaultResources(acroFormEmpty.getDefaultResources());
-//        pdfDocEmpty.getDocumentCatalog().setAcroForm(acroFormEmpty);
-
-//        int pageIndex = 0;
-//        for (PDPage page: pdfDoc.getPages()) {
-//            log.warn("Copy Page annotation and resource : " + pageIndex);
-//            pdfDocEmpty.getPage(pageIndex).setAnnotations(page.getAnnotations());
-//            pdfDocEmpty.getPage(pageIndex).setResources(page.getResources());
-//            pageIndex++;
-//        }
 
         List<PDField> fields = acroForm.getFields();
         for (PDField field: fields) {
@@ -92,11 +69,10 @@ public class PdfController {
 //            if ("YYY".equals(fieldName) || "MM".equals(fieldName) || "DD".equals(fieldName)) {
 //                fieldsEmpty.add(field);
 //            }
-//
+
 //            acroFormEmpty.setFields(fieldsEmpty);
 //            log.warn("Full Qualified Name : " + field.getFullyQualifiedName());
-
-////            log.warn("Partial Name : " + field.getPartialName());
+//            log.warn("Partial Name : " + field.getPartialName());
 //
 //            // get field info
             COSDictionary fieldDict = field.getCOSObject();
@@ -146,38 +122,6 @@ public class PdfController {
                         }
                     }
                     // remove field
-////                    List<PDAnnotation> annotations = page.getAnnotations();
-////                    boolean removed = false;
-////
-////                    for (PDAnnotation annotation : annotations) {
-////                        if (annotation.getCOSObject().equals(widget.getCOSObject())) {
-////                            removed = annotations.remove(annotation);
-////                            break;
-////                        }
-////                    }
-                }
-            }
-
-//            pdAppearanceStream.setBBox(new PDRectangle(x, y, width, height));
-
-
-//            PDAppearanceDictionary pdAppearanceDictionary =
-//        PDImageXObject pdImage = JPEGFactory.createFromImage(pdfDoc, ImageIO.read(imgFile));
-
-
-//            float left = (float)((COSFloat) fieldAreaArray.get(0)).floatValue();
-//            float bottom = (float)((COSFloat) fieldAreaArray.get(1)).floatValue();
-//            float right = (float)((COSFloat) fieldAreaArray.get(2)).floatValue();
-//            float top = (float)((COSFloat) fieldAreaArray.get(3)).floatValue();
-
-//            log.warn("PDF Field {} left:{}, bottom:{}, right:{}, top:{}.", field.getFullyQualifiedName(), left, bottom, right, top);
-            // remove field
-//            List<PDAnnotationWidget> widgets = ((PDTerminalField) field).getWidgets();
-//            for (PDAnnotationWidget widget: widgets) {
-//                PDPage page = widget.getPage();
-
-
-//                if (page != null) {
 //                    List<PDAnnotation> annotations = page.getAnnotations();
 //                    boolean removed = false;
 //
@@ -187,35 +131,11 @@ public class PdfController {
 //                            break;
 //                        }
 //                    }
-//                }
-//            }
+                }
+            }
         }
 
-//        // 定位頁數
-//        PDPage page = pdfDoc.getPage(1);
-//
-//        // 簽名圖檔
-//        File imgFile = ResourceUtils.getFile("classpath:static/001.jpg");
-////        PDImageXObject pdImage = PDImageXObject.createFromFileByContent(imgFile, pdfDoc);
-//        PDImageXObject pdImage = JPEGFactory.createFromImage(pdfDoc, ImageIO.read(imgFile));
-//        //
-//        PDRectangle mediaBox = page.getMediaBox();
-//        float margin = 75;
-//        float startX = mediaBox.getLowerLeftX();
-//        float startY = mediaBox.getUpperRightY();
-//
-//        System.out.print("StartX : " + startX);
-//        System.out.print("StartY : " + startY);
-//        // 套印
-//        // Creating PDPageContentStream Object
-//        PDPageContentStream contents = new PDPageContentStream(pdfDoc, page, PDPageContentStream.AppendMode.APPEND, false, true);
-//
-//        // DrawImage
-//        contents.drawImage(pdImage, startX + 70, startY - 150);
-//        contents.close();
-//
-
-//        // 產生新PDF
+        // 產生新PDF
         pdfDocEmpty.getPage(0);
         pdfDocEmpty.save("src/main/resources/static/001_new.pdf");
         pdfDoc.close();
